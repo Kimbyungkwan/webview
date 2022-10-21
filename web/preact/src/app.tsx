@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import preactLogo from './assets/preact.svg';
 import './app.css';
+import countStore from './store/countStore';
 
 export function App() {
-  const [count, setCount] = useState(0);
-
+  const { count, decrease, increase } = countStore((state) => state);
   return (
     <>
       <div>
@@ -17,9 +17,9 @@ export function App() {
       </div>
       <h1>Vite + Preact</h1>
       <div class='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <button onClick={decrease}>-</button>
+        <p>{count}</p>
+        <button onClick={increase}>+</button>
         <p>
           Edit <code>src/app.tsx</code> and save to test HMR
         </p>
