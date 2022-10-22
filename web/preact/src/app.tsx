@@ -2,6 +2,7 @@ import { useState } from 'react';
 import preactLogo from './assets/preact.svg';
 import './app.css';
 import countStore from './store/countStore';
+import WrapperComponent from './components/WrapperComponent';
 
 export function App() {
   const { count, decrease, increase } = countStore((state) => state);
@@ -16,14 +17,16 @@ export function App() {
         </a>
       </div>
       <h1>Vite + Preact</h1>
-      <div class='card'>
-        <button onClick={decrease}>-</button>
-        <p>{count}</p>
-        <button onClick={increase}>+</button>
-        <p>
-          Edit <code>src/app.tsx</code> and save to test HMR
-        </p>
-      </div>
+      <WrapperComponent>
+        <div class='card'>
+          <button onClick={decrease}>-</button>
+          <p>{count}</p>
+          <button onClick={increase}>+</button>
+          <p>
+            Edit <code>src/app.tsx</code> and save to test HMR
+          </p>
+        </div>
+      </WrapperComponent>
       <p class='read-the-docs'>
         Click on the Vite and Preact logos to learn more
       </p>
