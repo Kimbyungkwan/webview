@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import preactLogo from './assets/preact.svg';
 import './app.css';
-import countStore from './store/countStore';
-import WrapperComponent from './components/WrapperComponent';
+
+import WrapperComponent from '@components/WrapperComponent';
+import countStore from '@stores/countStore';
 
 export function App() {
   const { count, decrease, increase } = countStore((state) => state);

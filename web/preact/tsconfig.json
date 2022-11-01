@@ -18,7 +18,9 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "paths": {
-      "react": ["./node_modules/preact/compat"]
+      "react": ["./node_modules/preact/compat"],
+      "@components/*": ["./src/components/*"],
+      "@stores/*": ["./src/store/*"]
     }
   },
   "include": ["src"],
