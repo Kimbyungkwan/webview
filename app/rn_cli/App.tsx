@@ -9,11 +9,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import WebView from 'react-native-webview';
 
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => {
-  return <></>;
+  return (
+    <SafeAreaView style={styles.container}>
+      <WebView source={{uri: 'http://127.0.0.1:3030'}} />
+    </SafeAreaView>
+  );
 };
 const SettingScreen = () => {
   return <></>;
