@@ -10,6 +10,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import WebView from 'react-native-webview';
+import useInitialURL from './src/hooks/useInitialURL';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,11 @@ const HomeScreen = () => {
   );
 };
 const SettingScreen = () => {
-  return <></>;
+  return (
+    <SafeAreaView style={styles.container}>
+      <WebView source={{uri: 'http://127.0.0.1:3040'}} />
+    </SafeAreaView>
+  );
 };
 
 const BottomTab = () => {
@@ -52,7 +57,7 @@ const BottomTab = () => {
 };
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
+  const {} = useInitialURL();
   return (
     <NavigationContainer>
       <SafeAreaView style={styles.container}>
