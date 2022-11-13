@@ -19,6 +19,11 @@ export function App() {
       </div>
       <h1>Vite + Preact</h1>
       <h6>여기는 프로필 페이지</h6>
+
+      <a href='webview://home' target='_blank'>
+        홈으로
+      </a>
+
       <WrapperComponent>
         <div class='card'>
           <button onClick={decrease}>-</button>

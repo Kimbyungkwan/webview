@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
+  Linking,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -7,31 +8,43 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import WebView from 'react-native-webview';
-import useInitialURL from './src/hooks/useInitialURL';
+// import {ScreenProps} from 'react-native-screens';
 
 const Tab = createBottomTabNavigator();
 
+// const Stack = createNativeStackNavigator();
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <WebView source={{uri: 'http://127.0.0.1:3030'}} />
+      <WebView
+        allowsBackForwardNavigationGestures
+        source={{uri: 'http://localhost:3030'}}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+      />
     </SafeAreaView>
   );
 };
 const SettingScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <WebView source={{uri: 'http://127.0.0.1:3040'}} />
+      <WebView
+        allowsBackForwardNavigationGestures
+        source={{uri: 'http://localhost:3040'}}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+      />
     </SafeAreaView>
   );
 };
 
 const BottomTab = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -43,7 +56,7 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="Mypage"
+        name="Setting"
         component={SettingScreen}
         options={{
           headerShown: false,
@@ -57,12 +70,39 @@ const BottomTab = () => {
 };
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {} = useInitialURL();
+  // const {} = useInitialURL();
+
+  useEffect(() => {
+    Linking.getInitialURL().then(url => console.log(url));
+    Linking.addEventListener('url', ({url}) => {
+      console.log(url);
+    });
+  }, []);
+  const linking = {
+    prefixes: ['webview://'],
+    config: {
+      screens: {
+        Home: 'home',
+        Setting: 'setting',
+      },
+    },
+  };
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-
+        {/* <Stack.Navigator initialRouteName="home">
+          <Stack.Screen
+            name="home"
+            component={HomeScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="setting"
+            component={SettingScreen}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator> */}
         <BottomTab />
       </SafeAreaView>
     </NavigationContainer>

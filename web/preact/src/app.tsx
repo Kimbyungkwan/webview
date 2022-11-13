@@ -7,6 +7,7 @@ import countStore from '@stores/countStore';
 
 export function App() {
   const { count, decrease, increase } = countStore((state) => state);
+
   return (
     <>
       <div>
@@ -18,6 +19,11 @@ export function App() {
         </a>
       </div>
       <h1>Vite + Preact</h1>
+      <h6>여기는 메인 페이지</h6>
+      <a href='webview://setting' target='_blank'>
+        프로필로
+      </a>
+
       <WrapperComponent>
         <div class='card'>
           <button onClick={decrease}>-</button>
